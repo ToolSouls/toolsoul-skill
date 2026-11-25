@@ -8,7 +8,7 @@
 
 | Skill | 用途 |
 |---|---|
-| [qiling-sdk-integrate](skills/qiling-sdk-integrate/SKILL.md) | 软件授权、套餐与设备校验，或 API Key 浏览器授权、文本/图片/视频模型、任务和余额查询 |
+| [qiling-sdk-integrate](skills/qiling-sdk-integrate/SKILL.md) | 软件授权、套餐与设备校验，或 API Key 浏览器授权、文本/图片/视频模型、DeepSeek 网页搜索、任务和余额查询 |
 
 适用于 Python 桌面工具、Web 和其他语言软件。模型接口采用 OpenAI 格式，已有 OpenAI SDK 程序替换 API Key、Base URL、Model 即可；软件授权和平台功能使用器灵 SDK。不要求重写工程，也不自动上传、上架、付款或部署。
 
@@ -51,7 +51,7 @@ npx skills add ToolSouls/toolsoul-skill --skill qiling-sdk-integrate
 
 模型使用 `/v1/models` 返回的 `data[].id`；开放文本、图片和视频请求号均可选；需要业务重试时保存并复用原号。文本读取 `choices[0].message.content`，图片读取 `data[]`；流式沿用官方 SDK。调用按用户余额计费，与软件普通次数额度分开；结果不明时不自动重发。旧 `/api/v1/open` 模型路径已移除，工具和账户接口保持原路径。
 
-新增能力包括函数工具、并行工具、工具结果续接、JSON 结构化输出、多模态理解、图片编辑/流式，以及视频参考素材、音频与首尾帧；按模型配置和上游支持启用。调用细节见 [模型能力参考](skills/qiling-sdk-integrate/references/model-capabilities.md)。普通调用可用 Python 3.9+；器灵 SDK 的官方 OpenAI 桥接可选依赖需 Python 3.10+。
+新增能力包括函数工具、并行工具、工具结果续接、JSON 结构化输出、多模态理解、图片编辑/流式、DeepSeek 网页搜索，以及视频参考素材、音频与首尾帧；按模型配置和上游支持启用。网页搜索使用`POST /v1/tools/search`，成功且结果非空时按次计费，空结果和失败不收费。调用细节见 [模型能力参考](skills/qiling-sdk-integrate/references/model-capabilities.md)。普通调用可用 Python 3.9+；器灵 SDK 的官方 OpenAI 桥接可选依赖需 Python 3.10+。
 
 新增思考模式能力声明：读取 supports_thinking/thinking_modes 和动态请求 Schema 后提供开关；不传 thinking 仍可能采用上游默认思考。软件登录与 AI 付费账号可以不同，AI 费用及记录归 API Key 账号。当前模型调用不预扣或冻结余额，按可信实际用量结算，余额可为负；充值先抵欠款。
 

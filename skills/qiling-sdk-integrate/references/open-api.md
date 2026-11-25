@@ -79,6 +79,7 @@ text = result.choices[0].message.content
 |---|---|---|
 | 模型目录/单模型 | GET `/v1/models`、`/v1/models/{model_id}` | 官方 models.list/retrieve；器灵 models/model |
 | 文本 | POST `/v1/chat/completions` | 官方 chat.completions.create；器灵 chat |
+| DeepSeek 网页搜索 | POST `/v1/tools/search` | 器灵 search；返回 results 和 qiling 计费 |
 | 图片 | POST `/v1/images/generations` | 官方 images.generate；器灵 image 为普通 JSON |
 | 图片编辑 | POST `/v1/images/edits` | 官方 images.edit，multipart 文件；支持模型开放的 SSE |
 | 视频扩展 | POST `/v1/videos` | 器灵 video，request_id 可选，支持 content 与便捷素材字段 |
@@ -93,6 +94,21 @@ text = result.choices[0].message.content
 旧 `/api/v1/open` 模型路径已移除，不再提供回退请求。账户、工具和快速授权保留原路径。工具提交只有 endpoint/input/options，不加模型字段；模型视频使用独立 videos 路径。
 
 文本/图片仍需 model 及原协议的 messages 或 prompt；请求号为可选 request_id 或 Idempotency-Key。普通官方调用无需自定义字段，省略时平台生成。需要可靠业务重试时，事先保存请求号，官方 SDK 在 extra_headers 中传固定 Idempotency-Key；器灵客户端用 idempotency_key 或 request_id。默认关闭生成请求自动重试，未知结果先查询原平台调用；不同内容不能共用请求号。开放视频 request_id 也可省略或使用 Idempotency-Key，返回顶层 id/status/billing 和 data.video_url；请求尾帧且上游返回时读取 data.last_frame_url。SDK Bearer 视频仍必填 request_id。
+
+网页搜索示例：
+
+```python
+result = client.search(
+    "DeepSeek 最新发布 site:deepseek.com",
+    count=5,
+    need_content=False,
+    idempotency_key="search-001",
+)
+for item in result["results"]:
+    print(item["title"], item["url"])
+```
+
+搜索支持 site:、-site:、lang:、after:、before:、精确短语和排除关键词。按成功且结果非空的上游请求次数计费，空结果和失败不收费；count 不影响单次价格。SDK Bearer 使用 `ai_search()`，费用进入当前软件授权 AI 账单。
 
 ### 去 AI 正文与换行
 
