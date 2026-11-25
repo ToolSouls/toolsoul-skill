@@ -2,7 +2,7 @@
 
 帮助 AI 编程助手为现有工程接入器灵软件授权和开放 API。每个 Skill 是可读取的工作说明与必要参考资料，按 Agent Skills 的 `SKILL.md` 结构组织。
 
-[官网](https://toolsoul.daniu7.cn) · [在线开发文档](https://867fas1f7s.apifox.cn/) · [Python SDK](https://github.com/qilingAI/qiling-sdk-python)
+[官网](https://toolsoul.daniu7.cn) · [在线开发文档](https://867fas1f7s.apifox.cn/) · [Python SDK](https://github.com/ToolSouls/toolsoul-sdk-python)
 
 ## 当前 Skill
 
@@ -17,7 +17,7 @@
 支持 Skills CLI 的编程助手，可以安装指定 Skill：
 
 ```sh
-npx skills add qilingAI/qiling-skills --skill qiling-sdk-integrate
+npx skills add ToolSouls/toolsoul-skill --skill qiling-sdk-integrate
 ```
 
 安装时选择需要的助手与项目范围；本命令不是上传、付款或部署授权。也可以手动安装：克隆仓库，将 `skills/qiling-sdk-integrate` 整个文件夹放入你的编程助手支持的 Skills 目录。支持显式调用的助手可以这样请求：

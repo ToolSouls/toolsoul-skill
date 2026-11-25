@@ -7,7 +7,7 @@
 - API 在线文档：https://867fas1f7s.apifox.cn/
 - AI 索引：https://867fas1f7s.apifox.cn/llms.txt
 - 当前服务规范：在已确认的 API 根地址下读取 `/api/v1/public/developer-openapi.json`
-- Python SDK：https://github.com/qilingAI/qiling-sdk-python
+- Python SDK：https://github.com/ToolSouls/toolsoul-sdk-python
 - 官网：https://toolsoul.daniu7.cn
 - API 根地址：由项目配置或用户确认的接入信息提供，不预设生产域名；官网地址不自动作为 API 地址。
 

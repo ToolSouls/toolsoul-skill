@@ -17,7 +17,7 @@ license: MIT
 软件接入从项目配置找到平台实际返回的 **App Key**，以及用户选择测试还是正式接入。App Key 不能拿 software/product ID、UUID 或自行推导的 slug 替代。缺少时只询问必要配置；测试授权码由用户在“我的软件 → 开发调试”生成，不自动新建软件或生成平台授权。独立工具直接调用开放 API 时可省略 App Key。
 
 - [在线 API 文档](https://867fas1f7s.apifox.cn/)；通过 [llms.txt](https://867fas1f7s.apifox.cn/llms.txt) 查找当前接口页，只读相关内容。
-- [官方 Python SDK](https://github.com/qilingAI/qiling-sdk-python)。根据项目原包管理器记录依赖，选择已核实的 release/tag；不要臆造版本、PyPI 发布状态或安装来源。
+- [官方 Python SDK](https://github.com/ToolSouls/toolsoul-sdk-python)。根据项目原包管理器记录依赖，选择已核实的 release/tag；不要臆造版本、PyPI 发布状态或安装来源。
 - 接入参数、流程、关键错误及离线摘要见 [references/integration.md](references/integration.md)。读不了在线文档时使用该摘要，并说明未核对最新版本。
 
 ## 软件授权接入
